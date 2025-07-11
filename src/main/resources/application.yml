@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: movie_review_java_25
+
+
+server:
+  port: 8089
