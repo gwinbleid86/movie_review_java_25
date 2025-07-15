@@ -1,7 +1,14 @@
 spring:
   application:
     name: movie_review_java_25
-
+  datasource:
+    url: jdbc:h2:./db/test;AUTO_SERVER=TRUE
+    username: root
+    password: qwerty
+    driver-class-name: org.h2.Driver
+  sql:
+    init:
+      mode: always
 
 server:
   port: 8089
