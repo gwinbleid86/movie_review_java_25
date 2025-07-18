@@ -19,8 +19,8 @@ public class ImageController {
     private final ImageService imageService;
 
     @GetMapping // images/1
-    public ResponseEntity<?> getImage(@RequestParam(name = "filename") String filename) {
-        return imageService.getById(filename);
+    public ResponseEntity<?> getImage(@RequestParam(name = "movieId") Long movieId) {
+        return imageService.getByMovieId(movieId);
     }
 
     @PostMapping
