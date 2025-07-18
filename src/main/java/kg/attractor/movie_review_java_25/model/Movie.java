@@ -1,12 +1,10 @@
 package kg.attractor.movie_review_java_25.model;
 
-import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-@Builder
 public class Movie {
     private int id;
     private String name;
