@@ -1,5 +1,7 @@
 package kg.attractor.movie_review_java_25.controller;
 
+import jakarta.validation.Valid;
+import kg.attractor.movie_review_java_25.dto.UserDto;
 import kg.attractor.movie_review_java_25.model.User;
 import kg.attractor.movie_review_java_25.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("auth")
 @RequiredArgsConstructor
 public class AuthController {
     private final UserService userService;
@@ -34,7 +36,7 @@ public class AuthController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
+    public User createUser(@RequestBody @Valid UserDto user) {
         return userService.createUser(user);
     }
 }
