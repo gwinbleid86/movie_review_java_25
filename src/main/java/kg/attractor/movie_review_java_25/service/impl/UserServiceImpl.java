@@ -1,6 +1,7 @@
 package kg.attractor.movie_review_java_25.service.impl;
 
 import kg.attractor.movie_review_java_25.dao.UserDao;
+import kg.attractor.movie_review_java_25.dto.UserDto;
 import kg.attractor.movie_review_java_25.exceptions.UserNotFoundException;
 import kg.attractor.movie_review_java_25.model.User;
 import kg.attractor.movie_review_java_25.service.UserService;
@@ -31,8 +32,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(User user) {
-        int newUserId = userDao.addUser(user);
-        return getUserById(newUserId);
+    public User createUser(UserDto user) {
+//        int newUserId = userDao.addUser(user);
+        User newUser = new User();
+        newUser.setUsername(user.getUsername());
+        newUser.setPassword(user.getPassword());
+        return newUser;
     }
 }
