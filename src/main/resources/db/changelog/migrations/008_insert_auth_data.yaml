@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: 008_insert_data_to_tables_roles_authorities_user_table
+      author: Aleksei Podstavin
+      changes:
+        - sql:
+            comment: insert default authorities
+            sql: |
+              insert into authorities(authority)
+              values('FULL'), ('READ_ONLY');
+        - sql:
+            comment: insert default roles
+            sql: |
+              insert into roles(role_name, authority_id)
+              values('ADMIN', (select id from authorities where authority = 'FULL')),
+              ('USER', (select id from authorities where authority = 'READ_ONLY'));
+        - sql:
+            comment: insert default users
+            sql: |
+              insert into user_table(email, username, password, role_id)
+              values(
+                'qwe@qwe.qwe', 
+                'qwe', 
+                '$2a$12$WB2YUbFcCN0tm44SBcKUjua9yiFBsfB3vW02IjuwzY7HGtlQIKzy2', 
+                (select id from roles where role_name = 'ADMIN')
+              ),
+              (
+                'asd@asd.asd',
+                'asd',
+                '$2a$12$WB2YUbFcCN0tm44SBcKUjua9yiFBsfB3vW02IjuwzY7HGtlQIKzy2',
+                (select id from roles where role_name = 'USER')
+              );
