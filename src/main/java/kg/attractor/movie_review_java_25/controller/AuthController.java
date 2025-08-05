@@ -17,20 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("auth")
 @RequiredArgsConstructor
 public class AuthController {
     private final UserService userService;
     private final AuthenticationService authenticationService;
-
-
-    @GetMapping
-    public List<User> getUsers() {
-        return userService.getUsers();
-    }
 
     @GetMapping("username/{username}")
     public User getUsersByUsername(@PathVariable String username) {

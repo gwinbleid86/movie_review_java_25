@@ -13,19 +13,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
     private final RoleDao roleDao;
     private final PasswordEncoder encoder;
-
-    @Override
-    public List<User> getUsers() {
-        return userDao.getAllUsers();
-    }
 
     /**
      * Получение пользователя по имени пользователя
@@ -45,7 +38,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(UserDto user) {
-//        int newUserId = userDao.addUser(user);
         User newUser = new User();
         newUser.setUsername(user.getUsername());
         newUser.setPassword(encoder.encode(user.getPassword()));
@@ -77,7 +69,6 @@ public class UserServiceImpl implements UserService {
 
         return save(user);
     }
-
 
     /**
      * Получение пользователя по имени пользователя

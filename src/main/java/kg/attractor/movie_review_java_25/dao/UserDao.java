@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -23,11 +22,6 @@ public class UserDao {
     private final JdbcTemplate jdbcTemplate;
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private final KeyHolder keyHolder = new GeneratedKeyHolder();
-
-    public List<User> getAllUsers() {
-        String sql = "select * from USER_TABLE";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
-    }
 
     public Optional<User> getByUsername(String username) {
         String sql = "select * from USER_TABLE\n" +
