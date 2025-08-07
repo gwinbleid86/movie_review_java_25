@@ -1,35 +1,36 @@
 package kg.attractor.movie_review_java_25.dao;
 
-import kg.attractor.movie_review_java_25.model.Movie;
+import kg.attractor.movie_review_java_25.model.Director;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class MovieDao {
+public class DirectorDao {
     private final JdbcTemplate jdbcTemplate;
 
-    public Optional<Movie> getMovieById(long id) {
-        String sql = "SELECT * FROM movie WHERE id = ?";
+    public Optional<Director> findById(long id) {
+        String sql = "select * from director where id = ?";
         return Optional.ofNullable(
                 DataAccessUtils.singleResult(
                         jdbcTemplate.query(
                                 sql,
-                                new BeanPropertyRowMapper<>(Movie.class),
+                                new BeanPropertyRowMapper<>(Director.class),
                                 id
                         )
                 )
         );
     }
 
-    public List<Movie> getAllMovies() {
-        String sql = "SELECT * FROM movie";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Movie.class));
+    public Director findByMovieId(long movieId) {
+        String sql = "select * from DIRECTOR d, MOVIE m " +
+                "where d.ID = m.DIRECTOR_ID " +
+                "and m.ID = ?";
+        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Director.class), movieId);
     }
 }
