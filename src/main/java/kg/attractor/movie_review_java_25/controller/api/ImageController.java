@@ -1,4 +1,4 @@
-package kg.attractor.movie_review_java_25.controller;
+package kg.attractor.movie_review_java_25.controller.api;
 
 import kg.attractor.movie_review_java_25.dto.ImageDto;
 import kg.attractor.movie_review_java_25.service.ImageService;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("images")
+@RequestMapping("api/images")
 @RequiredArgsConstructor
 public class ImageController {
 
