@@ -55,7 +55,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/images").hasAuthority("ADMIN")
-                        .requestMatchers("/movies/**").fullyAuthenticated()
+//                        .requestMatchers("/movies/**").fullyAuthenticated()
                         .anyRequest().permitAll()
                 );
         return http.build();

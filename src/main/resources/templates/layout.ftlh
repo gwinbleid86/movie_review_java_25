@@ -1,3 +1,4 @@
+<#import "spring.ftl" as spring>
 <#macro layout>
 
     <!DOCTYPE html>
@@ -95,7 +96,7 @@
 
 
     <div class="container">
-        <#nested >
+        <#nested spring>
     </div>
     </body>
 

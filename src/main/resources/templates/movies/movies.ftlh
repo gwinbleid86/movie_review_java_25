@@ -7,6 +7,7 @@
             <th>Title</th>
             <th>Director</th>
             <th>Release Year</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -14,8 +15,9 @@
             <tr>
                 <td>${movie?index + 1}</td>
                 <td>${movie.name}</td>
-                <td>${movie.director.fullName}</td>
+                <td>${movie.director.fullName!'some director'}</td>
                 <td>${movie.year?c}</td>
+                <td><a href="/movies/${movie.id}" class="btn btn-info">More</a></td>
             </tr>
         </#list>
         </tbody>
