@@ -10,7 +10,7 @@ import lombok.Data;
 public class UserDto {
     @NotBlank
     @Email
-    private String username;
+    private String email;
 
     @NotBlank
     @Size(min = 3, max = 24, message = "Length must be >= 4 and <= 24")

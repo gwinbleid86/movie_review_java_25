@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
     public User createUser(UserDto user) {
 //        int newUserId = userDao.addUser(user);
         User newUser = new User();
-        newUser.setUsername(user.getUsername());
+        newUser.setUsername(user.getEmail());
         newUser.setPassword(encoder.encode(user.getPassword()));
         return newUser;
     }
