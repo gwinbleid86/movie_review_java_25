@@ -10,5 +10,13 @@
         <div class="card-footer text-muted">
             ${movie.description}
         </div>
+        <div class="card-footer text-muted">
+            <p>Cast members:</p>
+            <ul>
+                <#list movie.cast as cast>
+                    <li>${cast.fullName}: ${cast.role}</li>
+                </#list>
+            </ul>
+        </div>
     </div>
 </@main.layout>
