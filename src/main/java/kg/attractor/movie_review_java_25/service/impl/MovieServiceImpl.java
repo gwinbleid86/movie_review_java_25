@@ -31,7 +31,7 @@ public class MovieServiceImpl implements MovieService {
                     Director director = directorRepository.findById(e.getDirector().getId())
                             .orElseThrow(DirectorNotFoundException::new);
                     List<CastMemberDto> castList = e.getMovieCastMemberList().stream()
-                            .map(c -> castService.getCastMember(c.getCast().getId(), e.getId()))
+                            .map(c -> castService.getCastMember(c.getId().getCast().getId(), e.getId()))
                             .toList();
                     return MovieDto.builder()
                             .id(e.getId())
@@ -53,7 +53,7 @@ public class MovieServiceImpl implements MovieService {
         Movie movie = movieRepository.findById(id)
                 .orElseThrow(MovieNotFoundException::new);
         List<CastMemberDto> castList = movie.getMovieCastMemberList().stream()
-                .map(c -> castService.getCastMember(c.getCast().getId(), movie.getId()))
+                .map(c -> castService.getCastMember(c.getId().getCast().getId(), movie.getId()))
                 .toList();
         return MovieDto.builder()
                 .id(movie.getId())

@@ -2,7 +2,6 @@ package kg.attractor.movie_review_java_25.repository;
 
 import kg.attractor.movie_review_java_25.model.Cast;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -15,11 +14,11 @@ public interface CastRepository extends JpaRepository<Cast, Long> {
 //                    "and mcm.CAST_MEMBER_ID = :castId",
 //            nativeQuery = true
 //    )
-    @Query(
-            "select mcm.role from Cast c, MovieCastMember mcm " +
-                    "where c.id = mcm.cast.id " +
-                    "and mcm.movie.id = :movieId " +
-                    "and mcm.cast.id = :castId"
-    )
-    String findRoleByCast(long movieId, long castId);
+//    @Query(
+//            "select mcm.role from Cast c, MovieCastMember mcm " +
+//                    "where c.id = mcm.cast.id " +
+//                    "and mcm.movie.id = :movieId " +
+//                    "and mcm.cast.id = :castId"
+//    )
+//    String findRoleByCast(long movieId, long castId);
 }
