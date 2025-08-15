@@ -12,6 +12,8 @@ import kg.attractor.movie_review_java_25.repository.MovieRepository;
 import kg.attractor.movie_review_java_25.service.CastService;
 import kg.attractor.movie_review_java_25.service.MovieService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +29,32 @@ public class MovieServiceImpl implements MovieService {
     public List<MovieDto> getAllMovies() {
         List<Movie> movies = movieRepository.findAll();
         return movies.stream()
+                .map(e -> {
+                    Director director = directorRepository.findById(e.getDirector().getId())
+                            .orElseThrow(DirectorNotFoundException::new);
+                    List<CastMemberDto> castList = e.getMovieCastMemberList().stream()
+                            .map(c -> castService.getCastMember(c.getId().getCast().getId(), e.getId()))
+                            .toList();
+                    return MovieDto.builder()
+                            .id(e.getId())
+                            .name(e.getName())
+                            .year(e.getReleaseYear())
+                            .description(e.getDescription())
+                            .director(DirectorDto.builder()
+                                    .id(director.getId())
+                                    .fullName(director.getFullName())
+                                    .build())
+                            .cast(castList)
+                            .build();
+                })
+                .toList();
+    }
+
+    @Override
+    public List<MovieDto> getAllSortedAndPagedMovies(Pageable pageable) {
+//        Pageable pageable = PageRequest.of(page, size, getSortMethod(sortedValue));
+        Page<Movie> movies = movieRepository.findAll(pageable);
+        return movies.getContent().stream()
                 .map(e -> {
                     Director director = directorRepository.findById(e.getDirector().getId())
                             .orElseThrow(DirectorNotFoundException::new);
