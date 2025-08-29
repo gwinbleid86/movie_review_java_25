@@ -11,6 +11,9 @@ import kg.attractor.movie_review_java_25.repository.UserRepository;
 import kg.attractor.movie_review_java_25.service.UserService;
 import kg.attractor.movie_review_java_25.util.Utility;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -90,5 +93,24 @@ public class UserServiceImpl implements UserService {
 
         String url = Utility.makeSiteUrl(request) + "/reset-password?token=" + token;
         emailService.sendEmail(email, url);
+    }
+
+    @Override
+    public void processOAuthPostLogin(String username) {
+        var existUser = userRepository.findByEmail(username);
+
+        if (existUser.isEmpty()) {
+            Role role = roleRepository.findByRoleName("USER");
+            User user = new User();
+            user.setEmail(username);
+            user.setPassword(encoder.encode("qwerty"));
+            user.setRole(role);
+            user.setEnabled(Boolean.TRUE);
+            userRepository.saveAndFlush(user);
+        }
+
+        UserDetails userDetails = loadUserByUsername(username);
+        Authentication auth = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(auth);
     }
 }
