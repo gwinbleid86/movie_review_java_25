@@ -1,10 +1,12 @@
 spring:
+  config:
+    import: optional:file:.env[.properties]
   application:
     name: movie_review_java_25
   datasource:
     url: jdbc:h2:./db/movie_review;AUTO_SERVER=TRUE
-    username: root
-    password: qwerty
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: org.h2.Driver
   #  sql:
   #    init:
@@ -26,6 +28,19 @@ spring:
   freemarker:
     expose-session-attributes: true
 
+  #=============== Mail config
+  mail:
+    host: smtp.gmail.com
+    username: ${MAIL_USERNAME}
+    password: ${GOOGLE_APP_PASSWORD}
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true
+#=============== Mail config
+
 
 server:
   port: 8089
@@ -36,7 +51,7 @@ logging:
     root: info
     org:
       springframework:
-        security: error
+        security: debug
       hibernate:
         stat: error
         type: error
