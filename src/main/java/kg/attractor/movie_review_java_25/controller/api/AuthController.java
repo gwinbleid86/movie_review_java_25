@@ -26,17 +26,12 @@ public class AuthController {
     }
 
     @GetMapping("{id}")
-    public User getUser(@PathVariable int id) {
+    public User getUser(@PathVariable String id) {
         return userService.getUserById(id);
     }
 
-    @GetMapping("username/{username}")
-    public List<User> getUsersByUsername(@PathVariable String username) {
-        return userService.findByUsername(username);
-    }
-
     @PostMapping
-    public User createUser(@RequestBody @Valid UserDto user) {
-        return userService.createUser(user);
+    public void createUser(@RequestBody @Valid UserDto user) {
+        userService.createUser(user);
     }
 }
