@@ -41,6 +41,18 @@ spring:
           starttls.enable: true
 #=============== Mail config
 
+  #============ Google config
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${OAUTH_ID}
+            client-secret: ${OAUTH_SECRET}
+            scope:
+              - email
+              - profile
+#============ Google config
 
 server:
   port: 8089

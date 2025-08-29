@@ -21,4 +21,6 @@ public interface UserService extends UserDetailsService {
     void updatePassword(User user, String newPasswd);
 
     void makeResetPasswordLink(HttpServletRequest request) throws MessagingException, UnsupportedEncodingException;
+
+    void processOAuthPostLogin(String username);
 }
