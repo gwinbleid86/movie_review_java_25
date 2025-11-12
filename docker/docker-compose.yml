@@ -21,8 +21,8 @@ services:
     ports:
       - "8089:8089"
     volumes:
-      - db:/app/db
-      - logs:/app/logs
-      - data:/app/data
+      - ./db:/app/db
+      - ./logs:/app/logs
+      - ./data:/app/data
 #    depends_on:
 #      - db
