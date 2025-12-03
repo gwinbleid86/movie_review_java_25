@@ -5,7 +5,7 @@
 #COPY .env ./
 #RUN mvn clean package -DskipTests
 
-FROM openjdk:21
+FROM openjdk:21-ea-slim
 RUN mkdir /app
 COPY ./movie_review*jar ./app/movie_review.jar
 WORKDIR /app
