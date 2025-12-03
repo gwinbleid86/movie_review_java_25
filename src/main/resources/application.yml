@@ -28,32 +28,6 @@ spring:
   freemarker:
     expose-session-attributes: true
 
-  #=============== Mail config
-  mail:
-    host: smtp.gmail.com
-    username: ${MAIL_USERNAME}
-    password: ${GOOGLE_APP_PASSWORD}
-    port: 587
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls.enable: true
-#=============== Mail config
-
-  #============ Google config
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: ${OAUTH_ID}
-            client-secret: ${OAUTH_SECRET}
-            scope:
-              - email
-              - profile
-#============ Google config
-
 server:
   port: 8089
 
