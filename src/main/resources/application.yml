@@ -1,6 +1,4 @@
 spring:
-  config:
-    import: optional:file:./env/.env[.properties]
   application:
     name: movie_review_java_25
   datasource:
