@@ -25,5 +25,6 @@ services:
       - ./logs:/app/logs
       - ./data:/app/data
       - ./.env:/app/.env
+      - ./config:/app/config
 #    depends_on:
 #      - db
